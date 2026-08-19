@@ -1,0 +1,8 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/conexao.php';
+require_once __DIR__ . '/funcoes.php';
+$stmt = $pdo->query('SELECT id, cliente_nome, cliente_email, pagamento, total, status, criado_em FROM pedidos ORDER BY id DESC');
+$pedidos = $stmt->fetchAll();
+?>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pedidos | Administração</title><link rel="stylesheet" href="CSS/estilo.css"></head><body><header class="topo"><div class="container"><h1>Administração Aurora Tech</h1><nav><a href="index.php">Loja</a><a href="listar.php">Produtos</a><a href="pedidos.php">Pedidos</a><a href="cadastro.php">Cadastrar produto</a></nav></div></header><main class="container pagina-interna"><div class="cabecalho"><div><p class="eyebrow">OPERAÇÃO DA LOJA</p><h2>Pedidos recebidos</h2><p><?= count($pedidos) ?> pedido(s) registrado(s).</p></div><a class="botao" href="index.php">Ver vitrine</a></div><div class="tabela-wrapper"><table><thead><tr><th>Pedido</th><th>Cliente</th><th>Pagamento</th><th>Total</th><th>Status</th><th>Data</th></tr></thead><tbody><?php if (!$pedidos): ?><tr><td colspan="6">Nenhum pedido recebido ainda.</td></tr><?php endif; ?><?php foreach ($pedidos as $pedido): ?><tr><td><strong>#<?= (int)$pedido['id'] ?></strong></td><td><?= e($pedido['cliente_nome']) ?><br><small><?= e($pedido['cliente_email']) ?></small></td><td><?= e($pedido['pagamento']) ?></td><td><?= formatarPreco($pedido['total']) ?></td><td><span class="status <?= strtolower(e($pedido['status'])) ?>"><?= e($pedido['status']) ?></span></td><td><?= e(date('d/m/Y H:i', strtotime($pedido['criado_em']))) ?></td></tr><?php endforeach; ?></tbody></table></div></main></body></html>

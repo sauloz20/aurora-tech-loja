@@ -1,0 +1,5 @@
+﻿.vscode/
+.env
+config.local.php
+*.log
+Thumbs.db
