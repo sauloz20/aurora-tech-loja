@@ -26,6 +26,20 @@ Inicie o Apache e o MySQL/MariaDB no painel do seu ambiente. Abra o phpMyAdmin, 
 
 Se a mensagem de conexão aparecer, as causas mais comuns são: serviço MySQL parado, banco `crud_produtos` ainda não importado, usuário ou senha incorretos, porta diferente de `3306`, ou extensão `pdo_mysql` desabilitada no PHP.
 
+## Estrutura e validação
+
+- Arquivos `.php` na raiz: telas e operações da loja.
+- `CSS/estilo.css`: estilos da interface.
+- `banco_importacao.sql` e `banco.sql`: scripts do banco.
+- `testes/teste_funcoes.php`: testes de funções.
+- `.github/workflows/php.yml`: verificação de sintaxe e execução dos testes no GitHub Actions.
+
+Para executar os testes de funções localmente:
+
+```sh
+php testes/teste_funcoes.php
+```
+
 ## Roteiro de demonstração do trabalho
 
 Comece pela vitrine em `index.php`, mostrando a variedade de produtos, a busca, o filtro por categoria e o contador do carrinho. Em seguida, entre em um produto e clique em **Adicionar**. No carrinho, altere a quantidade e demonstre o cálculo do subtotal, frete e total.
